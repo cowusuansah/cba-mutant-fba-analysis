@@ -38,17 +38,17 @@ This research explores how a mutation conferring phage resistance in *C. baltica
 
 ## Methods
 
-### Model Construction and Curation
+### Model Construction
 
 The genome-scale metabolic model of *Cellulophaga baltica* 18 (Cba18-WT, NZ_CP009976) was constructed and curated as follows:
 1.  **Genome Annotation:** The genome was imported into KBase and annotated using RASTtk (v1.073).
 2.  **Model Construction:** A draft model was built using the KBase "MS2 - Build Prokaryotic Metabolic Models with OMEGGA" tool (v2.0.0), applying a Gram-negative template biomass composition.
 3.  **Gapfilling:** The model was gapfilled to enable growth on experimentally verified carbon sources (D-glucose, lactose, D-maltose, sucrose, fructose, L-glutamic acid, salicin), adding 65 reactions listed in `simulations/CBA18_RAST_defined_add_threonine_adolase/other/gapfilling_reactions.tsv`.
-4.  **Manual Curation:** A threonine aldolase reaction (`rxn00541`), catalyzed by gene `M666_RS13845`, was added to the model based on homology to *E. coli* *itaE*. This curation was necessary to allow the simulated growth of mutant 184f1, consistent with experimental observations. Details can be found in `models/manual curation/threonine_aldolase.txt`.
-5.  **Export:** The final model (`models/CBA18_RAST_defined.xml`, 1,295 reactions, 848 genes) was exported for analysis using COBRApy (v0.29.1).
+4.  **Export:** The final model (`models/CBA18_RAST_defined.xml`, 1,295 reactions, 848 genes) was exported for analysis using COBRApy (v0.29.1).
 
 ### Simulation of Wild-Type and Mutant Phenotypes
 
+-   **Manual Curation:** A threonine aldolase reaction (`rxn00541`), catalyzed by gene `M666_RS13845`, was added to the model based on homology to *E. coli* *itaE*. This curation was necessary to allow the simulated growth of mutant 184f1, consistent with experimental observations. Details can be found in `models/manual curation/threonine_aldolase.txt`.
 -   **Mutant 184f1:** The mutation affects gene `M666_RS17370` (phosphoglycerate dehydrogenase, involved in L-serine biosynthesis, `rxn01101`). This was simulated by constraining the flux through the corresponding reaction to zero.
 -   **Mutants 184d1 & 184e1:** These mutants affect gene `M666_RS13880` (L-threonine degradation, `rxn00274`). These mutants were *not* analyzed further using FBA because the affected reaction was found to be blocked (zero flux) in the wild-type model under all simulated conditions, preventing FBA-based phenotype prediction (see `simulations/CBA18_RAST_defined_add_threonine_adolase/other/blocked_reactions.tsv`).
 -   **Media:** Simulations used defined single-carbon-source media and a complex LB medium formulation from the ModelSEED database (`growth_media/`).
