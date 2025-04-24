@@ -4,17 +4,14 @@ This repository contains analysis code, data, and models for investigating the m
 
 ## Project Overview
 
-This research explores how a mutation conferring phage resistance in *C. baltica* mutant 184f1 affects its metabolism compared to the wild-type (Cba18-WT), and the potential ecological significance of these changes. Using a genome-scale metabolic model and constraint-based analysis methods, we characterize the metabolic consequences of a mutation in L-serine biosynthesis and relate these changes to phage resistance mechanisms.
+This research uses Flux Balance Analysis to investigate how a mutation in *C. baltica* mutant 184f1 affects its metabolism and contributes to phage resistance mechanisms.
 
 ### Key Research Questions Explored with FBA
 
 - What are the predicted metabolic flux changes in mutant 184f1 compared to Cba18-WT?
-- How does the L-serine biosynthesis mutation impact related pathways and overall metabolism?
 - Can FBA modeling suggest metabolic bottlenecks potentially contributing to phage resistance in 184f1?
 
 ## Repository Structure
-
-*(Note: This structure reflects the repository before planned cleanup. Some files/folders might be removed before final publication.)*
 
 - `analysis.ipynb`: Jupyter notebook containing all analysis code described in the methods.
 
@@ -40,7 +37,7 @@ This research explores how a mutation conferring phage resistance in *C. baltica
 
 ### Model Construction
 
-The genome-scale metabolic model of *Cellulophaga baltica* 18 (Cba18-WT, NZ_CP009976) was constructed and curated as follows:
+The genome-scale metabolic model of *Cellulophaga baltica* 18 (Cba18-WT, NZ_CP009976) was constructed as follows:
 1.  **Genome Annotation:** The genome was imported into KBase and annotated using RASTtk (v1.073).
 2.  **Model Construction:** A draft model was built using the KBase "MS2 - Build Prokaryotic Metabolic Models with OMEGGA" tool (v2.0.0), applying a Gram-negative template biomass composition.
 3.  **Gapfilling:** The model was gapfilled to enable growth on experimentally verified carbon sources (D-glucose, lactose, D-maltose, sucrose, fructose, L-glutamic acid, salicin), adding 65 reactions listed in `simulations/CBA18_RAST_defined_add_threonine_adolase/other/gapfilling_reactions.tsv`.
@@ -81,4 +78,4 @@ This project requires Python and the following core packages:
 
 ### Running the Analysis
 
-The primary analysis is contained within the Jupyter notebook `analysis.ipynb`. Ensure all dependencies are installed and the Gurobi solver is configured. 
+The primary analysis is contained within the Jupyter notebook `analysis.ipynb`. Ensure all dependencies are installed and the Gurobi solver is configured.
