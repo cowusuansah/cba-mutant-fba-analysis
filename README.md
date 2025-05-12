@@ -14,6 +14,7 @@ This research uses Flux Balance Analysis to investigate how a mutation in *C. ba
 ## Repository Structure
 
 - `analysis.ipynb`: Jupyter notebook containing all FBA analysis code. Run interactively via Colab: [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cowusuansah/cba-mutant-fba-analysis/blob/main/analysis.ipynb)
+  - **Note:** Simulating the mutant using MOMA requires the Gurobi solver. The `analysis.ipynb` notebook, by default, uses pre-existing data from this repository and does not require Gurobi. However, generating new simulation data within the notebook will likely require the Gurobi solver, which needs a license.
 
 - `models/`: Metabolic models and related files
   - `CBA18_RAST_defined.xml`: Genome-scale metabolic model of *C. baltica* 18 (Cba18-WT).
@@ -33,32 +34,3 @@ This research uses Flux Balance Analysis to investigate how a mutation in *C. ba
 - `escher maps/`: Metabolic pathway visualizations.
 
 - `growth_and_mutant_data/`: Experimental data on growth and mutant characterization.
-
-## Methods
-
-### Model Construction and Curation
-
-The genome-scale metabolic model of *Cellulophaga baltica* 18 (Cba18-WT, NZ_CP009976) was constructed as follows:
-1.  **Genome Annotation:** Using RASTtk within KBase.
-2.  **Model Reconstruction:** Using the KBase MS2 tool with a Gram-negative template.
-3.  **Gapfilling:** The model was gapfilled for growth on experimentally verified carbon sources (details in `models/curation/gapfilling_reactions.tsv`).
-4.  **Manual Curation:** A threonine aldolase reaction (`rxn00541`) was added based on gene homology and experimental necessity for simulating mutant growth (details in `models/curation/threonine_aldolase.txt`).
-5.  **Export:** The final model (`models/CBA18_RAST_defined.xml`) was exported for analysis with COBRApy.
-
-### Simulation of Wild-Type and Mutant Phenotypes
-
--   **Mutant 184f1:** The effect of the mutation in gene `M666_RS17370` (phosphoglycerate dehydrogenase) was simulated by constraining the flux through the corresponding reaction (`rxn01101`) to zero.
--   **Mutants 184d1 & 184e1:** These mutants, affecting L-threonine degradation (`rxn00274`), were not simulated further as the reaction was predicted to be blocked in the WT model (see `models/model_diagnostics/blocked_reactions.tsv`).
--   **Media:** Simulations used defined single-carbon-source media and a complex LB medium formulation (definitions in `growth_media/`).
--   **Constraints:** Physiologically relevant constraints were applied to oxygen and carbon source uptake rates. Specific values and rationale can be found in publication.
--   **Analysis Methods:**
-    -   **pFBA (Parsimonious FBA):** Used to predict Cba18-WT flux distributions.
-    -   **MOMA (Minimization Of Metabolic Adjustment):** Used to predict mutant 184f1 flux distributions (quadratic MOMA best matched experiments).
-    -   **Solver:** Gurobi.
-
-### Analysis of Metabolic Changes
-
-Metabolic differences between Cba18-WT (pFBA) and mutant 184f1 (quadratic MOMA) were assessed at multiple levels. See the `analysis.ipynb` notebook and the publication for detailed methods. Key analyses included:
-1.  **Reaction Level:** Comparing flux distributions (results in `simulations/.../fluxes/`).
-2.  **Pathway Level:** Aggregating reaction fluxes by KEGG and MetaCyc annotations.
-3.  **Metabolite Level:** Calculating total steady-state production rates (results in `simulations/.../metabolite_production/`).
