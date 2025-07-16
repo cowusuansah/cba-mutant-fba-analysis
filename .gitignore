@@ -1,5 +1,6 @@
 # Exclude the local directory
 local/
+figures/
 
 # Common Python files to ignore
 __pycache__/
