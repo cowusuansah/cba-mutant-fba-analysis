@@ -4,7 +4,7 @@ This repository contains analysis code, data, and models for investigating the m
 
 ## Project Overview
 
-This research uses Flux Balance Analysis to investigate how a mutation in *C. baltica* mutant 184f1 affects its metabolism and contributes to phage resistance mechanisms.
+This research uses Flux Balance Analysis to investigate how a mutation in *C. baltica* mutant 184f1 affects its metabolism and contributes to phage resistance mechanisms. The genome-scale metabolic model was constructed in KBase; the narrative is publicly available at [https://narrative.kbase.us/narrative/230154](https://narrative.kbase.us/narrative/230154 ) (interactive) and [https://kbase.us/n/230154/1/](https://kbase.us/n/230154/1/) (static).
 
 ### Key Research Questions Explored with FBA
 
